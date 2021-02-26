@@ -50,13 +50,13 @@ jobs:
           healthcheck: https://my-fullstackopen.herokuapp.com/health
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
-        - uses: 8398a7/action-slack@v3
-          with:
-            job_name: Deploy to Heroku
-            status: ${{ job.status }}
-            fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
-          env:
-            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-            MATRIX_CONTEXT: ${{ toJson(matrix) }}
-          if: ${{ success() }}
+      - uses: 8398a7/action-slack@v3
+        with:
+          job_name: Deploy to Heroku
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+        if: ${{ success() }}
 
