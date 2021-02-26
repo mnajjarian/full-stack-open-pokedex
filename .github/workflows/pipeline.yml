@@ -54,13 +54,7 @@ jobs:
         with:
           job_name: Deploy to Heroku
           status: ${{ job.status }}
-          fields: workflow,repo,message,commit,author,took
-          custom_payload: |
-            {
-              attachments: [{
-                text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}`,
-              }]
-            }
+          fields: repo,message,commit,author,took
           env: 
             SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
             MATRIX_CONTEXT: ${{ toJson(matrix) }}
