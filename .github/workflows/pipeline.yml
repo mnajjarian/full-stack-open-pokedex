@@ -24,13 +24,6 @@ jobs:
         run: npm run eslint
       - name: build
         run: npm run build
-        uses: action-slack@v3
-        with:
-          status: ${{ job.status }}
-          fields: repo,message,commit,author,took
-          env: 
-            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-            if: ${{ failure() }}
       - name: test
         run: npm run test
       - name: e2e tests
@@ -57,8 +50,9 @@ jobs:
           healthcheck: https://my-fullstackopen.herokuapp.com/health
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
-        uses: action-slack@v3
+       - uses: action-slack@v3
         with:
+          job_name: Deploy to Heroku
           status: ${{ job.status }}
           fields: repo,message,commit,author,took
           custom_payload: |
@@ -70,3 +64,10 @@ jobs:
           env: 
             SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
             if: ${{ success() }}
+          with:
+            job_name: build
+            status: ${{ job.status }}
+            fields: repo,message,commit,author,took
+            env: 
+              SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+              if: ${{ failure() }}
