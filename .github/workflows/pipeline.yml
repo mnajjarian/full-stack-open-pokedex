@@ -54,7 +54,7 @@ jobs:
         with:
           job_name: Deploy to Heroku
           status: ${{ job.status }}
-          fields: repo,message,commit,author,took
+          fields: workflow,repo,message,commit,author,took
           custom_payload: |
             {
               attachments: [{
