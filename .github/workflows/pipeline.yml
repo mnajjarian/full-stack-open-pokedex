@@ -66,7 +66,7 @@ jobs:
             {
               attachments: [{
                 color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-                text: `a new version deployed to ${process.env.AS_REPO}/ (${process.env.AS_REF}) by ${process.env.AS_AUTHOR} build took {process.env.AS_TOOK}`,
+                text: `a new version deployed to ${process.env.AS_REPO}/ (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} build took in ${process.env.AS_TOOK}`,
               }]
             }
         env:
