@@ -40,7 +40,7 @@ jobs:
           DEFAULT_BUMP: patch
           WITH_V: true
           REPO_OWNER: mnajjarian
-      - name: Deploy
+      - name: Deploy to heroku
         if: ${{ github.event_name == 'push' }}
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
@@ -60,7 +60,6 @@ jobs:
         if: failure()
       - uses: 8398a7/action-slack@v3
         with: 
-          job_name: Deploy
           status: ${{ job.status }}
           fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
           custom_payload: |
