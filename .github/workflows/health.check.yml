@@ -1,7 +1,9 @@
 name: Check the deployed service
+
 on:
-  schedule:
-    - cron:  '* * * * *'
+  push:
+    branches:
+      - master
 jobs:
     periodic health check:
       runs-on: ubuntu-18.04
