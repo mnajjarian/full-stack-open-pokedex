@@ -1,6 +1,8 @@
 name: Check the deployed service
 
 on:
+  # schedule:
+  #   - cron:  '* * * * *'
   push:
     branches:
       - master
